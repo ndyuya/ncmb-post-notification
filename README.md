@@ -1,2 +1,5 @@
 # ncmb-post-notification
-WordPress plug-ins that to notify the post by NIFTY Cloud mobile backend.
+
+記事投稿をした際に、ニフティクラウドmobile backendを通じてプッシュ通知を配信するプラグインです。
+
+WordPressにプラグインとして組み込み後、設定画面からニフティクラウドmobile backendのApplicationKeyとClientKeyを登録してください。
