@@ -30,15 +30,24 @@ class NCMBPostNotificationImplements {
 		if ($new_status == 'publish') {
 			$data = array(
 				'immediateDeliveryFlag' => true,
-				'target' => array('ios', 'android'),
-				'title' => mb_substr($post->post_title, 0, 10),
-				'message' => mb_substr($post->post_content, 0, 20),
-				'badgeIncrementFlag' => true,
+				'target' => array(),
+				'title' => mb_substr($post->post_title, 0, 20),
+				'message' => mb_substr($post->post_content, 0, 50),
 				'deliveryExpirationTime' => '10 day',
-				'sound' => 'default',
 			);
 
 			$options = get_option('ncmb_post_notification_option');
+
+			if (isset($options['to_ios'])) {
+				$data['target'][] = 'ios';
+				$data['sound'] = 'default';
+				$data['badgeIncrementFlag'] = true;
+			}
+
+			if (isset($options['to_android'])) {
+				$data['target'][] = 'android';
+			}
+
 			$ncmb_client = new NCMBClient($options['application_key'], $options['client_key']);
 
 			$ncmb_client->post('/push', json_encode($data));

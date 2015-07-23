@@ -28,7 +28,7 @@ class NCMBPostNotificationSettingsPage {
 
 	public function add_plugin_page() {
 		add_options_page(
-			'Post Notification by NIFTY Cloud mobile backend',
+			'Post Notification with NIFTY Cloud mobile backend',
 			'更新通知 (NCMB)',
 			'manage_options',
 			'ncmb-post-notification',
@@ -63,7 +63,7 @@ class NCMBPostNotificationSettingsPage {
 		add_settings_section(
 			'ncmb-post-notification-section',
 			'',
-			'',
+			array($this, 'section_callback'),
 			'ncmb-post-notification'
 		);
 
@@ -82,6 +82,22 @@ class NCMBPostNotificationSettingsPage {
 			'ncmb-post-notification',
 			'ncmb-post-notification-section'
 		);
+
+		add_settings_field(
+			'to_ios',
+			'Send to iOS',
+			array($this, 'to_ios_callback'),
+			'ncmb-post-notification',
+			'ncmb-post-notification-section'
+		);
+
+		add_settings_field(
+			'to_android',
+			'Send to Android',
+			array($this, 'to_android_callback'),
+			'ncmb-post-notification',
+			'ncmb-post-notification-section'
+		);
 	}
 
 	public function sanitize($input) {
@@ -93,8 +109,16 @@ class NCMBPostNotificationSettingsPage {
 		if (isset($input['client_key']))
 			$new_input['client_key'] = sanitize_text_field($input['client_key']);
 
+		if (isset($input['to_ios']))
+			$new_input['to_ios'] = true;
+
+		if (isset($input['to_android']))
+			$new_input['to_android'] = true;
+
 		return $new_input;
 	}
+
+	public function section_callback() {}
 
 	public function application_key_callback() {
 		printf(
@@ -107,6 +131,20 @@ class NCMBPostNotificationSettingsPage {
 		printf(
 			'<input type="text" id="client_key" name="ncmb_post_notification_option[client_key]" value="%s" />',
 			isset($this->options['client_key']) ? esc_attr($this->options['client_key']) : ''
+		);
+	}
+
+	public function to_ios_callback() {
+		printf(
+			'<input type="checkbox" id="to_ios" name="ncmb_post_notification_option[to_ios]" value="1" %s />',
+			isset($this->options['to_ios']) ? 'checked' : ''
+		);
+	}
+
+	public function to_android_callback() {
+		printf(
+			'<input type="checkbox" id="to_android" name="ncmb_post_notification_option[to_android]" value="1" %s />',
+			isset($this->options['to_android']) ? 'checked' : ''
 		);
 	}
 }
