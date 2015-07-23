@@ -1,6 +1,6 @@
 <?php
 /*
-	Plugin Name: Post Notification by NIFTY Cloud mobile backend
+	Plugin Name: Post Notification with NIFTY Cloud mobile backend
 	Plugin URI: http://mb.cloud.nifty.com/
 	Description: 記事が公開されると、ニフティクラウドmobile backendを通じてプッシュ通知を配信する
 	Author: nd.yuya
