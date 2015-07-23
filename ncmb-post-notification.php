@@ -5,7 +5,7 @@
 	Description: 記事が公開されると、ニフティクラウドmobile backendを通じてプッシュ通知を配信する
 	Author: nd.yuya
 	Author URI: http://www.nifty.co.jp/
-	Version: 0.0.1
+	Version: 0.0.2
 	License: Apache License, Version 2.0
 */
 
